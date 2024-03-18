@@ -50,7 +50,6 @@ const Main = () => {
                               }}/>
                     <Badge mb={2}>字段应包含：班级、姓名、学号、学院、辅导员（不限顺序）</Badge>
                 </Box>
-
                 <Stack>
                     <Text
                         color={'green.500'}
@@ -153,7 +152,6 @@ const Main = () => {
                         </Center>
                     </Stack>
                 </Stack>
-
             </Box>
         </Center>
     </>
