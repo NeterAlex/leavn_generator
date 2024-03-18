@@ -23,9 +23,9 @@ import ReactJson from "@microlink/react-json-view";
 const Main = () => {
     const yearsList = genYearsList()
     const [trainDateList, setTrainDateList] = useState<Date[]>([])
-    const [currentTrainDate, setCurrentTrainDate] = useState(moment(new Date()).format("YYYY-MM-DD HH:mm:ss"))
+    const [currentTrainDate, setCurrentTrainDate] = useState(moment(new Date()).format("YYYY-MM-DD"))
     const [sign, setSign] = useState("电气与信息学院")
-    const [signDate, setSignDate] = useState(moment(new Date()).format("YYYY-MM-DD HH:mm:ss"))
+    const [signDate, setSignDate] = useState(moment(new Date()).format("YYYY-MM-DD"))
     const [jsonStr, setJsonStr] = useState<string>("{}")
     const [year, setYear] = useState(new Date().getFullYear())
 
@@ -81,7 +81,8 @@ const Main = () => {
                         <Input
                             placeholder="选择日期"
                             size="md"
-                            type="datetime-local"
+                            type="date"
+
                             value={currentTrainDate}
                             onChange={(e) => setCurrentTrainDate(e.target.value)}
                         />
@@ -136,7 +137,7 @@ const Main = () => {
                     <Input mt={1}
                            placeholder="选择签名日期"
                            size="md"
-                           type="datetime-local"
+                           type="date"
                            value={signDate}
                            onChange={(e) => setSignDate(e.target.value)}
                     />
