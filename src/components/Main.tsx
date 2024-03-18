@@ -18,6 +18,7 @@ import moment from "moment";
 import {AddIcon, DeleteIcon, UpDownIcon} from "@chakra-ui/icons";
 import {organiseData} from "../utils/organiseData.ts";
 import ReactJson from "@microlink/react-json-view";
+import {genDoc} from "../utils/genDoc.ts";
 
 
 const Main = () => {
@@ -126,7 +127,7 @@ const Main = () => {
                         签名落款
                     </Heading>
                     <Spacer h={8}/>
-                    <Input type={"text"} value={sign} onChange={(e) => setSign(e.target.value)}/>
+                    <Input type={"text"} disabled value={sign} onChange={(e) => setSign(e.target.value)}/>
                     {/*日期*/}
                     <Heading mt={4}
                              color={useColorModeValue('gray.700', 'white')}
@@ -143,8 +144,7 @@ const Main = () => {
                     />
                     <Stack mt={8}>
                         <Button leftIcon={<UpDownIcon/>} color={"white"} bg={"green.500"} onClick={() => {
-                            //genDoc({jsonStr, year, trainDateList, signDate: moment(signDate).toDate()})
-                            organiseData(jsonStr)
+                            genDoc({jsonStr, year, trainDateList, signDate: moment(signDate).toDate()})
                         }}>生成</Button>
                     </Stack>
                 </Stack>
