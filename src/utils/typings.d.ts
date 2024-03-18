@@ -10,3 +10,4 @@ interface ClassInfoList {
     '班级': string,
     info: StudentInfo[]
 }
+

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {buildDoc} from "./buildDoc.ts";
 
 interface genDocParams {
@@ -56,3 +57,4 @@ export function genDoc({jsonStr, year, trainDateList, signDate}: genDocParams): 
         }
     }
 }
+

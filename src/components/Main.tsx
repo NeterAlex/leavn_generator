@@ -16,7 +16,8 @@ import {genYearsList} from "../utils/genYearsList.ts";
 import {useState} from "react";
 import moment from "moment";
 import {AddIcon, DeleteIcon, UpDownIcon} from "@chakra-ui/icons";
-import {genDoc} from "../utils/genDoc.ts";
+import {organiseData} from "../utils/organiseData.ts";
+import ReactJson from "@microlink/react-json-view";
 
 
 const Main = () => {
@@ -39,10 +40,14 @@ const Main = () => {
                 rounded={'md'}
                 p={6}
                 overflow={'hidden'}>
-                <Box h={'210px'} bg={'gray.100'} mt={-6} mx={-6} mb={6} pos={'relative'} padding={30}>
-                    <Textarea h={"full"} placeholder="请输入晚自习情况json" draggable={false} value={jsonStr}
-                              onChange={(e) => setJsonStr(e.target.value)}></Textarea>
+                <Box h={'210px'} bg={'gray.100'} mt={-6} mx={-6} mb={6} padding={30}>
+                    <Textarea h={"full"} maxH={"100%"} placeholder="请输入晚自习情况json" value={jsonStr}
+                              onChange={(e) => {
+                                  setJsonStr(e.target.value);
+                              }}/>
+                    <Badge mb={2}>字段应包含：班级、姓名、学号、学院、辅导员（不限顺序）</Badge>
                 </Box>
+
                 <Stack>
                     <Text
                         color={'green.500'}
@@ -50,6 +55,17 @@ const Main = () => {
                         fontWeight={800}
                         fontSize={'sm'}
                         letterSpacing={1.1}>
+                        数据预览
+                    </Text>
+                    <ReactJson src={organiseData(jsonStr)} collapsed={true} enableClipboard={false} name="输入数据"
+                               iconStyle={"square"}
+                               displayDataTypes={false}/>
+                    <Text mt={4}
+                          color={'green.500'}
+                          textTransform={'uppercase'}
+                          fontWeight={800}
+                          fontSize={'sm'}
+                          letterSpacing={1.1}>
                         信息填写
                     </Text>
                     {/*培训日期*/}
@@ -126,7 +142,8 @@ const Main = () => {
                     />
                     <Stack mt={8}>
                         <Button leftIcon={<UpDownIcon/>} color={"white"} bg={"green.500"} onClick={() => {
-                            genDoc({jsonStr, year, trainDateList, signDate: moment(signDate).toDate()})
+                            //genDoc({jsonStr, year, trainDateList, signDate: moment(signDate).toDate()})
+                            organiseData(jsonStr)
                         }}>生成</Button>
                     </Stack>
                 </Stack>

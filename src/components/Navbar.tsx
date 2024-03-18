@@ -15,7 +15,7 @@ import {
     useColorModeValue,
     useDisclosure,
 } from '@chakra-ui/react'
-import {CloseIcon, HamburgerIcon, ReactIcon} from '@chakra-ui/icons'
+import {CloseIcon, HamburgerIcon} from '@chakra-ui/icons'
 
 interface Props {
     children: React.ReactNode
@@ -77,12 +77,14 @@ export default function WithAction() {
                                     colorScheme={'teal'}
                                     size={'sm'}
                                     mr={4}
-                                    leftIcon={<ReactIcon/>}>
-                                    菜单
+                                >
+                                    功能
                                 </Button>
                             </MenuButton>
                             <MenuList>
-                                <MenuItem>Link 1</MenuItem>
+                                <MenuItem onClick={() => {
+                                    window.open("https://www.bejson.com/json/col2json/", "_blank")
+                                }}>CSV转JSON</MenuItem>
                                 <MenuItem>Link 2</MenuItem>
                                 <MenuDivider/>
                                 <MenuItem>Link 3</MenuItem>
