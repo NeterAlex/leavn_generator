@@ -27,13 +27,13 @@ const Main = () => {
     const [currentTrainDate, setCurrentTrainDate] = useState(moment(new Date()).format("YYYY-MM-DD"))
     const [sign, setSign] = useState("电气与信息学院")
     const [signDate, setSignDate] = useState(moment(new Date()).format("YYYY-MM-DD"))
-    const [jsonStr, setJsonStr] = useState<string>("{}")
+    const [jsonStr, setJsonStr] = useState<string>("")
     const [year, setYear] = useState(new Date().getFullYear())
 
     return <>
         <Center py={6}>
             <Box
-                maxW={'60%'}
+                maxW={'50%'}
                 minW={'480px'}
                 w={'full'}
                 bg={useColorModeValue('white', 'gray.900')}
@@ -42,7 +42,9 @@ const Main = () => {
                 p={6}
                 overflow={'hidden'}>
                 <Box h={'210px'} bg={'gray.100'} mt={-6} mx={-6} mb={6} padding={30}>
-                    <Textarea h={"full"} maxH={"100%"} placeholder="请输入晚自习情况json" value={jsonStr}
+                    <Textarea h={"full"} maxH={"100%"}
+                              placeholder="请输入包含请假人员数据的Json，若符合要求，数据将被自动解析、整理并显示在下方。"
+                              value={jsonStr}
                               onChange={(e) => {
                                   setJsonStr(e.target.value);
                               }}/>
@@ -142,10 +144,13 @@ const Main = () => {
                            value={signDate}
                            onChange={(e) => setSignDate(e.target.value)}
                     />
-                    <Stack mt={8}>
+                    <Stack mt={6} gap={4}>
                         <Button leftIcon={<UpDownIcon/>} color={"white"} bg={"green.500"} onClick={() => {
                             genDoc({jsonStr, year, trainDateList, signDate: moment(signDate).toDate()})
                         }}>生成</Button>
+                        <Center>
+                            <Badge colorScheme={"red"}>若文件下载不成功，请允许多次下载</Badge>
+                        </Center>
                     </Stack>
                 </Stack>
 
