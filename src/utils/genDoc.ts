@@ -7,7 +7,7 @@ interface genDocParams {
     signDate: Date
 }
 
-// 组织数据结构并下载
+// 组织数据结构并构建文档
 export function genDoc({jsonStr, year, trainDateList, signDate}: genDocParams): void {
     const students: StudentInfo[] = JSON.parse(jsonStr)
 
