@@ -16,6 +16,7 @@ import {genYearsList} from "../utils/genYearsList.ts";
 import {useState} from "react";
 import moment from "moment";
 import {AddIcon, DeleteIcon, UpDownIcon} from "@chakra-ui/icons";
+import {genDoc} from "../utils/genDoc.ts";
 
 
 const Main = () => {
@@ -24,7 +25,8 @@ const Main = () => {
     const [currentTrainDate, setCurrentTrainDate] = useState(moment(new Date()).format("YYYY-MM-DD HH:mm:ss"))
     const [sign, setSign] = useState("电气与信息学院")
     const [signDate, setSignDate] = useState(moment(new Date()).format("YYYY-MM-DD HH:mm:ss"))
-    const [jsonStr, setJsonStr] = useState("")
+    const [jsonStr, setJsonStr] = useState<string>("{}")
+    const [year, setYear] = useState(new Date().getFullYear())
 
     return <>
         <Center py={6}>
@@ -38,7 +40,8 @@ const Main = () => {
                 p={6}
                 overflow={'hidden'}>
                 <Box h={'210px'} bg={'gray.100'} mt={-6} mx={-6} mb={6} pos={'relative'} padding={30}>
-                    <Textarea h={"full"} placeholder="请输入晚自习情况json" draggable={false}></Textarea>
+                    <Textarea h={"full"} placeholder="请输入晚自习情况json" draggable={false} value={jsonStr}
+                              onChange={(e) => setJsonStr(e.target.value)}></Textarea>
                 </Box>
                 <Stack>
                     <Text
@@ -67,7 +70,7 @@ const Main = () => {
                             onChange={(e) => setCurrentTrainDate(e.target.value)}
                         />
                         <Button leftIcon={<AddIcon/>} bg={'green.100'} onClick={() => {
-                            setTrainDateList([...trainDateList, currentTrainDate])
+                            setTrainDateList([...trainDateList, moment(currentTrainDate).toDate()])
                         }}>增加</Button>
                         <Button leftIcon={<DeleteIcon/>} bg={'red.100'}
                                 onClick={() => setTrainDateList(trainDateList.slice(0, trainDateList.length - 1))}>回退</Button>
@@ -92,7 +95,7 @@ const Main = () => {
                     </Heading>
                     <Spacer h={8}/>
                     <Stack direction="row">
-                        <Select placeholder='选择年级'>
+                        <Select placeholder='选择年级' value={year} onChange={(e) => setYear(Number(e.target.value))}>
                             {yearsList.map((year, index) => {
                                 return (<option key={index} value={year}>{year}级</option>)
                             })}
@@ -122,7 +125,9 @@ const Main = () => {
                            onChange={(e) => setSignDate(e.target.value)}
                     />
                     <Stack mt={8}>
-                        <Button leftIcon={<UpDownIcon/>} color={"white"} bg={"green.500"}>生成</Button>
+                        <Button leftIcon={<UpDownIcon/>} color={"white"} bg={"green.500"} onClick={() => {
+                            genDoc({jsonStr, year, trainDateList, signDate: moment(signDate).toDate()})
+                        }}>生成</Button>
                     </Stack>
                 </Stack>
 
