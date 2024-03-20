@@ -150,9 +150,17 @@ const Main = () => {
                         <Center>
                             <Badge colorScheme={"red"}>若文件下载不成功，请允许多次下载</Badge>
                         </Center>
+                        <Center>
+                            <Box fontSize={12}
+                                 cursor={"pointer"}
+                                 color={"gray.500"}
+                                 onClick={() => window.open("https://beian.miit.gov.cn/", "_blank")}>黑ICP备2023004156号-1</Box>
+                        </Center>
+
                     </Stack>
                 </Stack>
             </Box>
+
         </Center>
     </>
 }
