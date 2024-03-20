@@ -43,7 +43,6 @@ export function organiseData(jsonStr: string) {
                         }
                     }
                 }
-                console.log(stuGrpByCollege)
                 return stuGrpByCollege
             }
         }
