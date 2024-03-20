@@ -5,12 +5,14 @@ import {
     Center,
     Heading,
     Input,
+    Link,
     Select,
     Spacer,
     Stack,
     Text,
     Textarea,
-    useColorModeValue
+    useColorModeValue,
+    VStack
 } from "@chakra-ui/react";
 import {genYearsList} from "../utils/genYearsList.ts";
 import {useState} from "react";
@@ -151,16 +153,24 @@ const Main = () => {
                             <Badge colorScheme={"red"}>若文件下载不成功或下载不全，请授予自动下载权限</Badge>
                         </Center>
                         <Center>
-                            <Box fontSize={12}
-                                 cursor={"pointer"}
-                                 color={"gray.500"}
-                                 onClick={() => window.open("https://beian.miit.gov.cn/", "_blank")}>黑ICP备2023004156号-1</Box>
+                            <VStack>
+                                <Link fontSize={12}
+                                      cursor={"pointer"}
+                                      href={"https://beian.miit.gov.cn/"}
+                                      target={"_blank"}
+                                      color={"gray.500"}
+                                >黑ICP备2023004156号</Link>
+                                <Link fontSize={12}
+                                      cursor={"pointer"}
+                                      href={"https://github.com/NeterAlex"}
+                                      target={"_blank"}
+                                      color={"gray.500"}
+                                >Made by NeterAlex @NEAUACM</Link>
+                            </VStack>
                         </Center>
-
                     </Stack>
                 </Stack>
             </Box>
-
         </Center>
     </>
 }
