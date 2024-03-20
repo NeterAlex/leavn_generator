@@ -148,7 +148,7 @@ const Main = () => {
                             genDoc({jsonStr, year, trainDateList, signDate: moment(signDate).toDate()})
                         }}>生成</Button>
                         <Center>
-                            <Badge colorScheme={"red"}>若文件下载不成功，请允许多次下载</Badge>
+                            <Badge colorScheme={"red"}>若文件下载不成功或下载不全，请授予自动下载权限</Badge>
                         </Center>
                         <Center>
                             <Box fontSize={12}
