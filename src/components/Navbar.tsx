@@ -1,6 +1,6 @@
 'use client'
 
-import {Box, Button, Flex, HStack, IconButton, Stack, Text, useColorModeValue, useDisclosure,} from '@chakra-ui/react'
+import {Box, Flex, HStack, IconButton, Stack, useColorModeValue, useDisclosure,} from '@chakra-ui/react'
 import {CloseIcon, HamburgerIcon} from '@chakra-ui/icons'
 
 interface Props {
@@ -42,28 +42,13 @@ export default function WithAction() {
                         onClick={isOpen ? onClose : onOpen}
                     />
                     <HStack spacing={8} alignItems={'center'} marginLeft={20}>
-                        <Box fontSize={18} color={"green.500"} fontWeight={"bold"}>假条生成器 | LeavN Generator</Box>
+                        <Box fontSize={18} color={"green.500"} fontWeight={"bold"}>LeavNG | 假条生成器</Box>
                         <HStack as={'nav'} spacing={4} display={{base: 'none', md: 'flex'}}>
                             <NavLink key={"home"} link={"#"}>首页</NavLink>
                             <NavLink key={"csv2json"} link={"https://www.bejson.com/json/col2json/"}>CSV转JSON</NavLink>
+                            <NavLink key={"neauacm"} link={"https://home.neauacm.cn/"}>NEAUACM</NavLink>
                         </HStack>
                     </HStack>
-                    <Flex alignItems={'center'} marginRight={20} gap={4}>
-                        <Text>
-                            By NeterAlex
-                        </Text>
-                        <Button
-                            variant={'solid'}
-                            colorScheme={'teal'}
-                            size={'sm'}
-                            mr={4}
-                            onClick={() => {
-                                window.open("https://home.neauacm.cn/", "_blank")
-                            }}
-                        >
-                            NEAUACM
-                        </Button>
-                    </Flex>
                 </Flex>
 
                 {isOpen ? (
@@ -71,6 +56,7 @@ export default function WithAction() {
                         <Stack as={'nav'} spacing={4}>
                             <NavLink key={"home"} link={"#"}>首页</NavLink>
                             <NavLink key={"csv2json"} link={"https://www.bejson.com/json/col2json/"}>CSV转JSON</NavLink>
+                            <NavLink key={"neauacm"} link={"https://home.neauacm.cn/"}>NEAUACM</NavLink>
                         </Stack>
                     </Box>
                 ) : null}

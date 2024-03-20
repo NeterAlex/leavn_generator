@@ -34,7 +34,7 @@ const Main = () => {
         <Center py={6}>
             <Box
                 maxW={'50%'}
-                minW={'480px'}
+                minW={'380px'}
                 w={'full'}
                 bg={useColorModeValue('white', 'gray.900')}
                 boxShadow={'2xl'}
