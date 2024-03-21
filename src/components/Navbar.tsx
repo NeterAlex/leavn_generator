@@ -32,7 +32,8 @@ export default function WithAction() {
 
     return (
         <>
-            <Box boxShadow={'sm'} bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+            <Box boxShadow={'sm'} borderBottom={"1px solid rgba(0,0,0,0.1)"}
+                 bg={useColorModeValue('#FAFAFA', 'gray.900')} px={4}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
                     <IconButton
                         size={'md'}

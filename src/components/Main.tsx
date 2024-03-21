@@ -39,7 +39,7 @@ const Main = () => {
                 minW={'380px'}
                 w={'full'}
                 bg={useColorModeValue('white', 'gray.900')}
-                boxShadow={'2xl'}
+                boxShadow={'lg'}
                 rounded={'md'}
                 p={6}
                 overflow={'hidden'}>

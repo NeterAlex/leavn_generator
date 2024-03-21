@@ -6,7 +6,7 @@ function App() {
 
     return (
         <>
-            <Flex direction="column" flex="1" w={"100%"}>
+            <Flex direction="column" flex="1" w={"100%"} bg={"#FAFAFA"}>
                 <Navbar/>
                 <Main/>
             </Flex>
