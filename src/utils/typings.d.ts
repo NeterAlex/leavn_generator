@@ -11,3 +11,21 @@ interface ClassInfoList {
     info: StudentInfo[]
 }
 
+interface DocBuilderParam {
+    college: string,
+    year: number,
+    classInfoList: ClassInfoList[],
+    trainDateList: Date[],
+    signDate: Date,
+    reason: "ACM集训队训练" | string,
+    conflictWith: "晚自习" | "上课" | string
+}
+
+interface genDocParams {
+    jsonStr: string,
+    year: number,
+    trainDateList: Date[],
+    signDate: Date
+    reason: string,
+    conflictWith: string
+}

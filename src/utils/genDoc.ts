@@ -2,15 +2,6 @@
 
 import {buildDoc} from "./buildDoc.ts";
 
-interface genDocParams {
-    jsonStr: string,
-    year: number,
-    trainDateList: Date[],
-    signDate: Date
-    reason: string,
-    conflictWith: string
-}
-
 // 组织数据结构并构建文档
 export function genDoc({jsonStr, year, trainDateList, signDate, reason, conflictWith}: genDocParams): void {
     const students: StudentInfo[] = JSON.parse(jsonStr)
