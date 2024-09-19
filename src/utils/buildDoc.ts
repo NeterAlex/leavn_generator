@@ -4,19 +4,20 @@ import PizZipUtils from "pizzip/utils";
 import {saveAs} from 'file-saver';
 import {formatDate} from "./formatDate.ts";
 
-interface docBuilderParam {
-    college: string,
-    year: number,
-    classInfoList: ClassInfoList[],
-    trainDateList: Date[],
-    signDate: Date
-}
 
 function loadFile(url: string, callback: any) {
     PizZipUtils.getBinaryContent(url, callback);
 }
 
-export function buildDoc({college, year, classInfoList, trainDateList, signDate}: docBuilderParam) {
+export function buildDoc({
+                             college,
+                             year,
+                             classInfoList,
+                             trainDateList,
+                             signDate,
+                             reason,
+                             conflictWith
+                         }: DocBuilderParam) {
     loadFile("/leave_note.docx", (error: Error, content: any) => {
         if (error) throw error;
         const zip = new PizZip(content);
@@ -31,7 +32,9 @@ export function buildDoc({college, year, classInfoList, trainDateList, signDate}
             train_date: trainDateList.map(formatDate).join('、'),
             leave_days: trainDateList.length,
             sign_date: formatDate(signDate),
-            classes: classInfoList
+            classes: classInfoList,
+            conflict_with: conflictWith.trim(),
+            reason: reason.trim()
         });
         const out = doc.getZip().generate({
             type: 'blob',
