@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import {buildDoc} from "./buildDoc.ts";
 
 interface genDocParams {
@@ -6,10 +7,12 @@ interface genDocParams {
     year: number,
     trainDateList: Date[],
     signDate: Date
+    reason: string,
+    conflictWith: string
 }
 
 // 组织数据结构并构建文档
-export function genDoc({jsonStr, year, trainDateList, signDate}: genDocParams): void {
+export function genDoc({jsonStr, year, trainDateList, signDate, reason, conflictWith}: genDocParams): void {
     const students: StudentInfo[] = JSON.parse(jsonStr)
 
     const stuGrpByCollege = students.reduce((acc: any, student) => {
@@ -51,7 +54,8 @@ export function genDoc({jsonStr, year, trainDateList, signDate}: genDocParams): 
                             classInfoList.push({'班级': className, info: studentList})
                         }
                     }
-                    buildDoc({college, year, classInfoList, trainDateList, signDate})
+                    classInfoList.sort((a, b) => a.班级.localeCompare(b.班级))
+                    buildDoc({college, year, classInfoList, trainDateList, signDate, reason, conflictWith})
                 }
             }
         }
