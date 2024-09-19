@@ -32,6 +32,21 @@ const Main = () => {
     const [jsonStr, setJsonStr] = useState<string>("")
     const [year, setYear] = useState(new Date().getFullYear())
 
+    const [reason, setReason] = useState("ACM集训队训练")
+    const [conflictWith, setConflictWith] = useState("晚自习")
+    const [showCustomConflict, setShowCustomConflict] = useState<boolean>(false)
+
+    const handleConflictChange = (e: any) => {
+        const value = e.target.value;
+        setConflictWith(value);
+        if (value === '自定义') {
+            setShowCustomConflict(true);
+        } else {
+            setShowCustomConflict(false);
+        }
+    };
+
+
     return <>
         <Center py={6}>
             <Box
@@ -45,12 +60,12 @@ const Main = () => {
                 overflow={'hidden'}>
                 <Box h={'210px'} bg={'gray.100'} mt={-6} mx={-6} mb={6} padding={30}>
                     <Textarea h={"full"} maxH={"100%"}
-                              placeholder="请输入包含请假人员数据的Json，若符合要求，数据将被自动解析、整理并显示在下方。"
+                              placeholder="请输入包含请假人员数据的 JSON。若符合要求，数据将被自动解析、整理并显示在下方。"
                               value={jsonStr}
                               onChange={(e) => {
                                   setJsonStr(e.target.value);
                               }}/>
-                    <Badge mb={2}>字段应包含：班级、姓名、学号、学院、辅导员（不限顺序）</Badge>
+                    <Badge mb={2}>JSON 字段应包含：班级、姓名、学号、学院、辅导员（不限顺序）</Badge>
                 </Box>
                 <Stack>
                     <Text
@@ -61,7 +76,7 @@ const Main = () => {
                         letterSpacing={1.1}>
                         数据预览
                     </Text>
-                    <ReactJson src={organiseData(jsonStr)} collapsed={true} enableClipboard={false} name="输入数据"
+                    <ReactJson src={organiseData(jsonStr)} collapsed={2} enableClipboard={false} name="输入数据"
                                iconStyle={"square"}
                                displayDataTypes={false}/>
                     <Text mt={4}
@@ -112,7 +127,7 @@ const Main = () => {
                              color={useColorModeValue('gray.700', 'white')}
                              fontSize={'2xl'}
                              fontFamily={'body'}>
-                        年级
+                        学生年级
                     </Heading>
                     <Spacer h={8}/>
                     <Stack direction="row">
@@ -122,15 +137,34 @@ const Main = () => {
                             })}
                         </Select>
                     </Stack>
-                    {/*落款*/}
+                    {/*请假事由*/}
                     <Heading mt={4}
                              color={useColorModeValue('gray.700', 'white')}
                              fontSize={'2xl'}
                              fontFamily={'body'}>
-                        签名落款
+                        请假事由
                     </Heading>
                     <Spacer h={8}/>
-                    <Input type={"text"} disabled value={sign} onChange={(e) => setSign(e.target.value)}/>
+                    <Input type={"text"} value={reason} onChange={(e) => setReason(e.target.value)}/>
+                    {/*冲突内容*/}
+                    <Heading mt={4}
+                             color={useColorModeValue('gray.700', 'white')}
+                             fontSize={'2xl'}
+                             fontFamily={'body'}>
+                        冲突内容
+                    </Heading>
+                    <Spacer h={8}/>
+                    <Select
+                        onChange={handleConflictChange}>
+                        <option value='晚自习'>晚自习</option>
+                        <option value='上课'>上课</option>
+                        <option value='自定义'>自定义</option>
+                    </Select>
+                    {
+                        showCustomConflict &&
+                        <Input type={"text"} placeholder={"输入冲突内容"} value={conflictWith}
+                               onChange={(e) => setConflictWith(e.target.value)}/>
+                    }
                     {/*日期*/}
                     <Heading mt={4}
                              color={useColorModeValue('gray.700', 'white')}
@@ -145,9 +179,46 @@ const Main = () => {
                            value={signDate}
                            onChange={(e) => setSignDate(e.target.value)}
                     />
-                    <Stack mt={6} gap={4}>
+
+                    {/*落款*/}
+                    <Heading mt={4}
+                             color={useColorModeValue('gray.700', 'white')}
+                             fontSize={'2xl'}
+                             fontFamily={'body'}>
+                        签名落款
+                    </Heading>
+                    <Spacer h={8}/>
+                    <Input type={"text"} disabled value={sign} onChange={(e) => setSign(e.target.value)}/>
+                    {/*事由预览*/}
+                    <Box h={'120px'} bg={'gray.100'} mt={4} mx={-6} mb={6} padding={30}>
+                        <Text mt={0}
+                              color={'green.500'}
+                              textTransform={'uppercase'}
+                              fontWeight={800}
+                              fontSize={'sm'}
+                              letterSpacing={1.1}>
+                            事由预览
+                        </Text>
+                        <Text mt={4}
+                              fontSize={'md'}
+
+                              letterSpacing={1.1}>
+                            参加<Text backgroundColor={"green.100"}
+                                      display={"inline"}>{reason}</Text>，与
+                            <Text backgroundColor={"green.100"} display={"inline"}>{conflictWith}</Text>冲突
+                        </Text>
+                    </Box>
+
+                    <Stack gap={4}>
                         <Button leftIcon={<UpDownIcon/>} color={"white"} bg={"green.500"} onClick={() => {
-                            genDoc({jsonStr, year, trainDateList, signDate: moment(signDate).toDate()})
+                            genDoc({
+                                jsonStr,
+                                year,
+                                trainDateList,
+                                signDate: moment(signDate).toDate(),
+                                reason: reason,
+                                conflictWith: conflictWith
+                            })
                         }}>生成</Button>
                         <Center>
                             <Badge colorScheme={"red"}>若文件下载不成功或下载不全，请授予自动下载权限</Badge>
@@ -165,7 +236,7 @@ const Main = () => {
                                       href={"https://github.com/NeterAlex"}
                                       target={"_blank"}
                                       color={"gray.500"}
-                                >Made by NeterAlex @NEAUACM</Link>
+                                >Made by 林歆 @NEAUACM</Link>
                             </VStack>
                         </Center>
                     </Stack>
