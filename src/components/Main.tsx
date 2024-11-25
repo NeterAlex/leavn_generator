@@ -9,8 +9,10 @@ import {
     Select,
     Spacer,
     Stack,
+    Switch,
     Text,
     Textarea,
+    Tooltip,
     useColorModeValue,
     VStack
 } from "@chakra-ui/react";
@@ -31,10 +33,10 @@ const Main = () => {
     const [signDate, setSignDate] = useState(moment(new Date()).format("YYYY-MM-DD"))
     const [jsonStr, setJsonStr] = useState<string>("")
     const [year, setYear] = useState(new Date().getFullYear())
-
     const [reason, setReason] = useState("ACM集训队训练")
     const [conflictWith, setConflictWith] = useState("晚自习")
     const [showCustomConflict, setShowCustomConflict] = useState<boolean>(false)
+    const [alignName, setAlignName] = useState(true)
 
     const handleConflictChange = (e: any) => {
         const value = e.target.value;
@@ -189,6 +191,26 @@ const Main = () => {
                     </Heading>
                     <Spacer h={8}/>
                     <Input type={"text"} disabled value={sign} onChange={(e) => setSign(e.target.value)}/>
+
+                    {/*设置*/}
+                    <Heading mt={4}
+                             color={useColorModeValue('gray.700', 'white')}
+                             fontSize={'2xl'}
+                             fontFamily={'body'}>
+                        设置
+                    </Heading>
+                    <Spacer h={8}/>
+                    <Stack direction="row" spacing={8}>
+                        <Tooltip content="启用则在二字姓名间添加全角空格补齐为三字">
+                            <Switch
+                                isChecked={alignName}
+                                onChange={(e) => setAlignName(e.target.checked)}
+                            >
+                                对齐姓名
+                            </Switch>
+                        </Tooltip>
+                    </Stack>
+
                     {/*事由预览*/}
                     <Box h={'120px'} bg={'gray.100'} mt={4} mx={-6} mb={6} padding={30}>
                         <Text mt={0}
@@ -217,7 +239,8 @@ const Main = () => {
                                 trainDateList,
                                 signDate: moment(signDate).toDate(),
                                 reason: reason,
-                                conflictWith: conflictWith
+                                conflictWith: conflictWith,
+                                alignName: alignName
                             })
                         }}>生成</Button>
                         <Center>

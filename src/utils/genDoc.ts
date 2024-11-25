@@ -3,7 +3,7 @@
 import {buildDoc} from "./buildDoc.ts";
 
 // 组织数据结构并构建文档
-export function genDoc({jsonStr, year, trainDateList, signDate, reason, conflictWith}: genDocParams): void {
+export function genDoc({jsonStr, year, trainDateList, signDate, reason, conflictWith, alignName}: genDocParams): void {
     const students: StudentInfo[] = JSON.parse(jsonStr)
 
     const stuGrpByCollege = students.reduce((acc: any, student) => {
@@ -46,7 +46,7 @@ export function genDoc({jsonStr, year, trainDateList, signDate, reason, conflict
                         }
                     }
                     classInfoList.sort((a, b) => a.班级.localeCompare(b.班级))
-                    buildDoc({college, year, classInfoList, trainDateList, signDate, reason, conflictWith})
+                    buildDoc({college, year, classInfoList, trainDateList, signDate, reason, conflictWith, alignName})
                 }
             }
         }

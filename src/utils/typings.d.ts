@@ -18,7 +18,8 @@ interface DocBuilderParam {
     trainDateList: Date[],
     signDate: Date,
     reason: "ACM集训队训练" | string,
-    conflictWith: "晚自习" | "上课" | string
+    conflictWith: "晚自习" | "上课" | string,
+    alignName: boolean
 }
 
 interface genDocParams {
@@ -27,5 +28,6 @@ interface genDocParams {
     trainDateList: Date[],
     signDate: Date
     reason: string,
-    conflictWith: string
+    conflictWith: string,
+    alignName: boolean
 }

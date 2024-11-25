@@ -16,10 +16,20 @@ export function buildDoc({
                              trainDateList,
                              signDate,
                              reason,
-                             conflictWith
+                             conflictWith,
+                             alignName
                          }: DocBuilderParam) {
     loadFile("/leave_note.docx", (error: Error, content: any) => {
         if (error) throw error;
+        if (alignName) {
+            for (const classInfo of classInfoList) {
+                classInfo.info.forEach((item) => {
+                    if (/^[\u4e00-\u9fa5]{2}$/.test(item.姓名)) {
+                        item.姓名 = `${item.姓名[0]}　${item.姓名[1]}`
+                    }
+                })
+            }
+        }
         const zip = new PizZip(content);
         const doc = new Docxtemplater(zip, {
             paragraphLoop: true,
