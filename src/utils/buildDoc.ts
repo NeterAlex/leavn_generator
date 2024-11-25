@@ -37,10 +37,7 @@ export function buildDoc({
     doc.render({
       college: college,
       year: year,
-      student_nums: classInfoList.reduce(
-        (sum, item) => sum + item.info.length,
-        0,
-      ),
+      student_nums: classInfoList.reduce((sum, item) => sum + item.info.length, 0),
       train_date: trainDateList.map(formatDate).join("、"),
       leave_days: trainDateList.length,
       sign_date: formatDate(signDate),
@@ -50,8 +47,7 @@ export function buildDoc({
     });
     const out = doc.getZip().generate({
       type: "blob",
-      mimeType:
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     });
     saveAs(out, `假条-${college}.docx`);
   });

@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  Box,
-  Flex,
-  HStack,
-  IconButton,
-  Stack,
-  useColorModeValue,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Box, Flex, HStack, IconButton, Stack, useColorModeValue, useDisclosure } from "@chakra-ui/react";
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { ReactNode } from "react";
 
@@ -59,18 +51,11 @@ export default function WithAction() {
             <Box fontSize={18} color={"green.500"} fontWeight={"bold"}>
               LeavNG | 假条生成器
             </Box>
-            <HStack
-              as={"nav"}
-              spacing={4}
-              display={{ base: "none", md: "flex" }}
-            >
+            <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
               <NavLink key={"home"} link={"#"}>
                 首页
               </NavLink>
-              <NavLink
-                key={"csv2json"}
-                link={"https://www.bejson.com/json/col2json/"}
-              >
+              <NavLink key={"csv2json"} link={"https://www.bejson.com/json/col2json/"}>
                 CSV转JSON
               </NavLink>
               <NavLink key={"neauacm"} link={"https://home.neauacm.cn/"}>
@@ -86,10 +71,7 @@ export default function WithAction() {
               <NavLink key={"home"} link={"#"}>
                 首页
               </NavLink>
-              <NavLink
-                key={"csv2json"}
-                link={"https://www.bejson.com/json/col2json/"}
-              >
+              <NavLink key={"csv2json"} link={"https://www.bejson.com/json/col2json/"}>
                 CSV转JSON
               </NavLink>
               <NavLink key={"neauacm"} link={"https://home.neauacm.cn/"}>

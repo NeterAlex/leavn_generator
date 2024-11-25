@@ -24,19 +24,14 @@ export function genDoc({
   for (const college in stuGrpByCollege) {
     if (Object.hasOwnProperty.call(stuGrpByCollege, college)) {
       const collegeGroup = stuGrpByCollege[college];
-      stuGrpByCollege[college] = collegeGroup.reduce(
-        (collegeAccumulator: any, student: any) => {
-          const instructor = student["辅导员"];
-          const className = student["班级"];
-          if (!collegeAccumulator[instructor])
-            collegeAccumulator[instructor] = {};
-          if (!collegeAccumulator[instructor][className])
-            collegeAccumulator[instructor][className] = [];
-          collegeAccumulator[instructor][className].push(student);
-          return collegeAccumulator;
-        },
-        {},
-      );
+      stuGrpByCollege[college] = collegeGroup.reduce((collegeAccumulator: any, student: any) => {
+        const instructor = student["辅导员"];
+        const className = student["班级"];
+        if (!collegeAccumulator[instructor]) collegeAccumulator[instructor] = {};
+        if (!collegeAccumulator[instructor][className]) collegeAccumulator[instructor][className] = [];
+        collegeAccumulator[instructor][className].push(student);
+        return collegeAccumulator;
+      }, {});
     }
   }
 
@@ -54,9 +49,7 @@ export function genDoc({
               const studentList: StudentInfo[] = [];
               // 遍历当前班级下的所有学生
               const studentsInClass = classes[className];
-              studentsInClass.forEach((student: StudentInfo) =>
-                studentList.push(student),
-              );
+              studentsInClass.forEach((student: StudentInfo) => studentList.push(student));
               classInfoList.push({ 班级: className, info: studentList });
             }
           }

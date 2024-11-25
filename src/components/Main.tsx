@@ -266,8 +266,9 @@ const Main = () => {
             </Heading>
             <Spacer h={8} />
             <Stack direction="row" spacing={8}>
-              <Tooltip content="启用则在二字姓名间添加全角空格补齐为三字">
+              <Tooltip label="启用后，将用全角空格填充姓名">
                 <Switch
+                  colorScheme="green"
                   isChecked={alignName}
                   onChange={(e) => setAlignName(e.target.checked)}
                 >
